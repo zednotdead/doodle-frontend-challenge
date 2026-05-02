@@ -7,7 +7,9 @@ export function Chat() {
       <div className="h-full pb-20 md:max-w-[640px] mx-auto">
         <MessageList />
       </div>
-      <MessageInput />
+      <div className="grid grid-cols-1 items-center justify-center absolute bottom-0 w-full h-20 bg-blue-500 min-h-4">
+        <MessageInput />
+      </div>
     </>
   );
 }
