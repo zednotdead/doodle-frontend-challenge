@@ -12,6 +12,8 @@ import { fetchMessagesBeforeTimestamp } from "../../api/before";
 import { fetchMessagesAfterTimestamp } from "../../api/after";
 import { sendMessage } from "../../api/submit";
 import { MessageContext } from "./context";
+import { useInterval } from "../../utils/useInterval";
+import { LOAD_NEWEST_MESSAGE_INTERVAL } from "../../consts";
 // INFO: Uncomment if you want to load the entire message backlog
 // import { fetchAllMessages } from "../../api/all";
 
@@ -95,6 +97,10 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
     [loadLatest, author],
   );
 
+  useInterval(() => {
+    loadLatest();
+  }, LOAD_NEWEST_MESSAGE_INTERVAL);
+
   return (
     <MessageContext.Provider
       value={{
@@ -105,7 +111,7 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
         author,
         setAuthor,
         loading,
-	reachedEnd,
+        reachedEnd,
       }}
     >
       {children}
