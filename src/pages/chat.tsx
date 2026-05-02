@@ -4,7 +4,8 @@ import { MessageList } from "../components/MessageList";
 import { useMessages } from "../contexts/MessageContext/hook";
 
 export function Chat() {
-  const { messages, loadPrevious, author, newMessage, loading } = useMessages();
+  const { messages, loadPrevious, author, newMessage, loading, reachedEnd } =
+    useMessages();
 
   const onNewMessageHandler = (msg: string) => {
     newMessage(msg);
@@ -20,7 +21,11 @@ export function Chat() {
           author={author}
           elementBeforeList={
             <div className="w-full grid place-items-center mb-4">
-              <LoadPrevious onClick={loadPrevious} loading={loading} />
+              <LoadPrevious
+                onClick={loadPrevious}
+                loading={loading}
+                reachedEnd={reachedEnd}
+              />
             </div>
           }
         />

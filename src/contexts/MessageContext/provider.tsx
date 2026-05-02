@@ -21,6 +21,7 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
   const [messages, setMessages] = useState<MessageSchema[]>([]);
   const [author, setAuthor] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
+  const [reachedEnd, setReachedEnd] = useState(false);
 
   // Store the timestamp at the oldest message
   const oldestTimestamp = useMemo(() => {
@@ -53,7 +54,11 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
     try {
       const oldMessages = await fetchMessagesBeforeTimestamp(oldestTimestamp);
 
-      setMessages(produce((draft) => oldMessages.concat(draft)));
+      if (oldMessages.length === 0) {
+        setReachedEnd(true);
+      } else {
+        setMessages(produce((draft) => oldMessages.concat(draft)));
+      }
     } finally {
       setLoading(false);
     }
@@ -99,7 +104,8 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
         loadPrevious,
         author,
         setAuthor,
-	loading,
+        loading,
+	reachedEnd,
       }}
     >
       {children}

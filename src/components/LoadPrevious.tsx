@@ -1,22 +1,33 @@
-import { cx } from "../utils/cva";
+import { cva } from "../utils/cva";
 
 interface LoadPreviousProps {
   onClick: () => void;
   loading: boolean;
-  className?: string;
+  reachedEnd: boolean;
 }
+
+const loadPreviousClass = cva({
+  base: "mt-2 p-2 w-fit",
+  variants: {
+    reachedEnd: {
+      true: "text-gray-500 text-center cursor-not-allowed",
+      false: "aspect-square bg-white shadow rounded-full hover:shadow-md transition-shadow cursor-pointer",
+    },
+  },
+});
 
 export function LoadPrevious({
   onClick,
   loading,
-  className,
+  reachedEnd,
 }: LoadPreviousProps) {
-  return (
+  return reachedEnd ? (
+    <p className={loadPreviousClass({ reachedEnd })}>
+      You reached the end of this conversation.
+    </p>
+  ) : (
     <button
-      className={cx(
-        "aspect-square p-2 bg-white shadow rounded-full w-fit hover:shadow-md transition-shadow cursor-pointer",
-        className,
-      )}
+      className={loadPreviousClass({ reachedEnd })}
       aria-label="Load previous"
       type="button"
       onClick={onClick}
