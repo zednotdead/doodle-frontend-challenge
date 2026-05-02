@@ -1,19 +1,9 @@
-import { MessageInput } from "./components/MessageInput";
-import { MessageList } from "./components/MessageList";
 import { useMessages } from "./contexts/MessageContext/hook";
-import { Login } from "./pages/Login";
+import { Chat } from "./pages/chat";
+import { Login } from "./pages/login";
 
 export function App() {
-  const { author } = useMessages()
-  
-  return author ? (
-    <div>
-      <MessageList />
-      <MessageInput />
-    </div>
-  ) : (
-    <div>
-      <Login />
-    </div>
-  );
+  const { author } = useMessages();
+
+  return author ? <Chat /> : <Login />;
 }

@@ -4,13 +4,17 @@ import { Message } from "./Message";
 export function MessageList() {
   const { messages, author, loadPrevious } = useMessages();
   return (
-    <div>
-      <button type="button" onClick={loadPrevious}>
+    <div className="max-h-full overflow-auto">
+      <button className="w-full" type="button" onClick={loadPrevious}>
         Load previous
       </button>
-      <ul>
+      <ul className="flex flex-col gap-4 mb-4">
         {messages.map((msg) => (
-          <Message message={msg} key={msg._id} belongsToSender={msg.author === author} />
+          <Message
+            message={msg}
+            key={msg._id}
+            belongsToSender={msg.author === author}
+          />
         ))}
       </ul>
     </div>

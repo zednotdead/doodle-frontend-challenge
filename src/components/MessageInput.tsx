@@ -15,9 +15,9 @@ export function MessageInput() {
   }
 
   return (
-    <div className="absolute bottom-0 w-full h-fit bg-blue-500 min-h-4">
+    <div className="grid grid-cols-1 items-center justify-center absolute bottom-0 w-full h-20 bg-blue-500 min-h-4">
       <form
-        className="flex flex-row gap-2 mx-auto md:max-w-[640px] px-6 py-2"
+        className="flex flex-row gap-2 mx-auto w-full md:max-w-[640px] px-6 py-2"
         onSubmit={onSubmitHandler}
       >
         <input
