@@ -1,8 +1,17 @@
-import { useMessages } from "../contexts/MessageContext/hook";
+import type { MessageSchema } from "../schema/message";
 import { Message } from "./Message";
 
-export function MessageList() {
-  const { messages, author, loadPrevious } = useMessages();
+interface MessageListProps {
+  messages: MessageSchema[];
+  author: string;
+  loadPrevious: () => void;
+}
+
+export function MessageList({
+  messages,
+  author,
+  loadPrevious,
+}: MessageListProps) {
   return (
     <div className="max-h-full overflow-auto">
       <button className="w-full" type="button" onClick={loadPrevious}>

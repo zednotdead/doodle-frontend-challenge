@@ -1,8 +1,10 @@
 import type { SubmitEventHandler } from "react";
-import { useMessages } from "../contexts/MessageContext/hook";
 
-export function MessageInput() {
-  const { newMessage } = useMessages();
+interface MessageInputProps {
+  onNewMessage: (message: string) => void
+}
+
+export function MessageInput({ onNewMessage }: MessageInputProps) {
   const onSubmitHandler: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const form = e.currentTarget
@@ -11,7 +13,7 @@ export function MessageInput() {
     const message = messageFD?.toString();
 
     if (message) {
-      newMessage(message);
+      onNewMessage(message);
       form.reset()
     }
   };
