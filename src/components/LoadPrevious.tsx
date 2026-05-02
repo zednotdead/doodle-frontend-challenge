@@ -1,3 +1,4 @@
+// Icon from Lucide: https://lucide.dev/icons/move-up
 import { cva } from "../utils/cva";
 
 interface LoadPreviousProps {
