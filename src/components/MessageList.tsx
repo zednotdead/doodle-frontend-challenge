@@ -1,22 +1,21 @@
+import type { ReactNode } from "react";
 import type { MessageSchema } from "../schema/message";
 import { Message } from "./Message";
 
 interface MessageListProps {
   messages: MessageSchema[];
   author: string;
-  loadPrevious: () => void;
+  elementBeforeList: ReactNode
 }
 
 export function MessageList({
   messages,
   author,
-  loadPrevious,
+  elementBeforeList
 }: MessageListProps) {
   return (
-    <div className="max-h-full overflow-auto">
-      <button className="w-full" type="button" onClick={loadPrevious}>
-        Load previous
-      </button>
+    <div className="max-h-full w-full overflow-auto">
+      {elementBeforeList}
       <ul className="flex flex-col gap-4 mb-4">
         {messages.map((msg) => (
           <Message

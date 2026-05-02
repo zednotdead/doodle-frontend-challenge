@@ -8,6 +8,7 @@ interface IMessageContext {
   loadPrevious: () => void;
   loadLatest: () => void;
   newMessage: (msg: string) => void;
+  loading: boolean
 }
 
 export const MessageContext = createContext<IMessageContext>({
@@ -16,4 +17,5 @@ export const MessageContext = createContext<IMessageContext>({
   loadPrevious: () => {},
   loadLatest: () => {},
   newMessage: () => {},
+  loading: true
 });

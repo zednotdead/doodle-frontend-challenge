@@ -1,9 +1,10 @@
+import { LoadPrevious } from "../components/LoadPrevious";
 import { MessageInput } from "../components/MessageInput";
 import { MessageList } from "../components/MessageList";
 import { useMessages } from "../contexts/MessageContext/hook";
 
 export function Chat() {
-  const { messages, loadPrevious, author, newMessage } = useMessages();
+  const { messages, loadPrevious, author, newMessage, loading } = useMessages();
 
   const onNewMessageHandler = (msg: string) => {
     newMessage(msg);
@@ -17,11 +18,15 @@ export function Chat() {
         <MessageList
           messages={messages}
           author={author}
-          loadPrevious={loadPrevious}
+          elementBeforeList={
+            <div className="w-full grid place-items-center mb-4">
+              <LoadPrevious onClick={loadPrevious} loading={loading} />
+            </div>
+          }
         />
       </div>
       <div className="grid grid-cols-1 items-center justify-center absolute bottom-0 w-full h-20 bg-blue-500 min-h-4">
-        <MessageInput onNewMessage={onNewMessageHandler} />
+        <MessageInput onNewMessage={onNewMessageHandler} loading={loading} />
       </div>
     </>
   );

@@ -20,6 +20,7 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
 }) => {
   const [messages, setMessages] = useState<MessageSchema[]>([]);
   const [author, setAuthor] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
 
   // Store the timestamp at the oldest message
   const oldestTimestamp = useMemo(() => {
@@ -47,17 +48,29 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
   const loadPrevious = useCallback(async () => {
     if (!oldestTimestamp) return;
 
-    const oldMessages = await fetchMessagesBeforeTimestamp(oldestTimestamp);
+    setLoading(true);
 
-    setMessages(produce((draft) => oldMessages.concat(draft)));
+    try {
+      const oldMessages = await fetchMessagesBeforeTimestamp(oldestTimestamp);
+
+      setMessages(produce((draft) => oldMessages.concat(draft)));
+    } finally {
+      setLoading(false);
+    }
   }, [oldestTimestamp]);
 
   const loadLatest = useCallback(async () => {
     if (!newestTimestamp) return;
 
-    const newMessages = await fetchMessagesAfterTimestamp(newestTimestamp);
+    setLoading(true);
 
-    setMessages(produce((draft) => draft.concat(newMessages)));
+    try {
+      const newMessages = await fetchMessagesAfterTimestamp(newestTimestamp);
+
+      setMessages(produce((draft) => draft.concat(newMessages)));
+    } finally {
+      setLoading(false);
+    }
   }, [newestTimestamp]);
 
   const newMessage = useCallback(
@@ -65,15 +78,29 @@ export const MessagesContextProvider: FC<PropsWithChildren> = ({
     async (message: string) => {
       if (!author) return;
 
-      await sendMessage(message, author);
-      await loadLatest();
+      setLoading(true);
+
+      try {
+        await sendMessage(message, author);
+        await loadLatest();
+      } finally {
+        setLoading(false);
+      }
     },
     [loadLatest, author],
   );
 
   return (
     <MessageContext.Provider
-      value={{ messages, newMessage, loadLatest, loadPrevious, author, setAuthor }}
+      value={{
+        messages,
+        newMessage,
+        loadLatest,
+        loadPrevious,
+        author,
+        setAuthor,
+	loading,
+      }}
     >
       {children}
     </MessageContext.Provider>

@@ -2,9 +2,10 @@ import type { SubmitEventHandler } from "react";
 
 interface MessageInputProps {
   onNewMessage: (message: string) => void
+  loading: boolean
 }
 
-export function MessageInput({ onNewMessage }: MessageInputProps) {
+export function MessageInput({ onNewMessage, loading }: MessageInputProps) {
   const onSubmitHandler: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const form = e.currentTarget
@@ -29,8 +30,9 @@ export function MessageInput({ onNewMessage }: MessageInputProps) {
         type="text"
         id="newmessage"
         name="newmessage"
+	disabled={loading}
       />
-      <button className="py-2 px-4 bg-orange-400 rounded-md text-white">
+      <button className="py-2 px-4 bg-orange-400 rounded-md text-white" disabled={loading}>
         Send
       </button>
     </form>
