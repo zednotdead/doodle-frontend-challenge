@@ -29,4 +29,8 @@ In order to build the application, simply run:
 bun run build
 ```
 
-The application will be outputted to `./dist`.
+The application will be outputted to `/dist`.
+
+## Configuration
+
+An important value is `MESSAGE_AMOUNT` in `/src/consts.ts` - it's intentionally set low, so that I can properly test and show off the logic for loading previous messages - setting it to a high value is advisable.
