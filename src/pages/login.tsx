@@ -1,7 +1,7 @@
 import type { SubmitEventHandler } from "react";
 import { useMessages } from "../contexts/MessageContext/hook";
 
-export function Login() {
+export default function Login() {
   const { setAuthor } = useMessages();
 
   const onSubmitHandler: SubmitEventHandler<HTMLFormElement> = (e) => {

@@ -1,6 +1,8 @@
+import { lazy } from "react";
 import { useMessages } from "./contexts/MessageContext/hook";
-import { Chat } from "./pages/chat";
-import { Login } from "./pages/login";
+
+const Chat = lazy(() => import("./pages/chat.tsx"));
+const Login = lazy(() => import("./pages/login.tsx"));
 
 export function App() {
   const { author } = useMessages();

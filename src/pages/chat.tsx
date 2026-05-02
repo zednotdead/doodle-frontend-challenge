@@ -3,7 +3,7 @@ import { MessageInput } from "../components/MessageInput";
 import { MessageList } from "../components/MessageList";
 import { useMessages } from "../contexts/MessageContext/hook";
 
-export function Chat() {
+export default function Chat() {
   const { messages, loadPrevious, author, newMessage, loading, reachedEnd } =
     useMessages();
 
