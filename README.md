@@ -34,3 +34,11 @@ The application will be outputted to `/dist`.
 ## Configuration
 
 An important value is `MESSAGE_AMOUNT` in `/src/consts.ts` - it's intentionally set low, so that I can properly test and show off the logic for loading previous messages - setting it to a high value is advisable.
+
+## Future improvements
+
+To contain myself within the set 4-6 hours time period, I have limited the scope of this application. Things I would've liked to include, had I had more time:
+
+- Unit testing with Vitest
+- End to end testing with Cypress/Playwright
+- Accessibility tests with Axe
