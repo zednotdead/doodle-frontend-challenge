@@ -1,5 +1,5 @@
 import type { SubmitEventHandler } from "react";
-import { useMessages } from "./contexts/MessageContext/hook";
+import { useMessages } from "../contexts/MessageContext/hook";
 
 export function MessageInput() {
   const { newMessage } = useMessages()

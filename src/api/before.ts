@@ -1,10 +1,10 @@
 import z from "zod";
-import { messageSchema } from "../schema/message";
-import { API_URL } from "../consts";
+import { messageSchema, type MessageSchema } from "../schema/message";
+import { API_URL, MESSAGE_AMOUNT } from "../consts";
 
 export async function fetchMessagesBeforeTimestamp(
   timestamp: Date,
-  limit: number = 2,
+  limit: number = MESSAGE_AMOUNT,
 ): Promise<MessageSchema[]> {
   const url = new URL(API_URL);
   url.searchParams.set("before", timestamp.toISOString());
